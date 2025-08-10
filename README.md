@@ -28,7 +28,6 @@
 
    ```bash
    git clone https://github.com/MaximOdeg/DDS/tree/feature_1
-   cd ваш_репозиторий
    
 2. Создайте виртуальное окружение:
 
