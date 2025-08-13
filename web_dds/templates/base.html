@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ДДС</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Веб-сервис для управления движением денежных средств</h1>
+        <nav>
+            <a href="{% url 'web_dds:transaction_create' %}" class="btn btn-primary">Добавить транзакцию</a>
+            <a href="{% url 'web_dds:transaction_list' %}" class="btn btn-secondary">Список транзакций</a>
+        </nav>
+    </header>
+    <section class="container mt-4">
+        {% block content %}{% endblock %}
+    </section>
+    <footer class="text-center py-3">
+        <p>&copy; 2025 Мой сайт</p>
+    </footer>
+    <script>
+        $(document).ready(function() {
+            $('#category').change(function() {
+                var categoryId = $(this).val();
+                var subcategorySelect = $('#subcategory');
+                subcategorySelect.empty();
+                subcategorySelect.append('<option value="">Все</option>');
+                if (categoryId) {
+                    $.ajax({
+                        url: '/api/subcategories/' + categoryId + '/',
+                        method: 'GET',
+                        success: function(data) {
+                            $.each(data, function(index, subcategory) {
+                                subcategorySelect.append('<option value="' + subcategory.id + '">' + subcategory.name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

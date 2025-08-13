@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Подтверждение удаления</h1>
+<p>Вы уверены, что хотите удалить транзакцию "{{ transaction }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'web_dds:transaction_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
